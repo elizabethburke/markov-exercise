@@ -8,7 +8,8 @@ class SimpleMarkovGenerator(object):
 
     def read_text(self, corpus):
         """Takes input text as string; returns dictionary of markov chains."""
-        poem_word = corpus.rstrip().replace(",", "").replace("?", "").split()
+        # poem_word = corpus.rstrip().replace(",", "").replace("?", "").split()
+        poem_word = corpus.rstrip().split()
         return poem_word
 
     def make_chains(self, poem_word):
@@ -27,11 +28,13 @@ class SimpleMarkovGenerator(object):
         source = self.read_text(full_text)
         chains, last_words = self.make_chains(source)
         start_words = random.choice(chains.keys())
+        while start_words[0].istitle() == False:
+            start_words = random.choice(chains.keys())
         second_word = random.choice(chains[start_words])
         w1 = start_words[1]
         w2 = second_word
         
-        gen_words = []
+        gen_words = [start_words[0], start_words[1]]
         while True:
             gen_words.append(w1)
             w1, w2 = w2, random.choice(chains[w1, w2])
@@ -50,7 +53,7 @@ if __name__ == "__main__":
     full_text = text1 + text2
     ourrandomscript = SimpleMarkovGenerator()
     ourrandomscript.make_text(full_text) 
-    ourrandomscript.make_text(full_text)
-    ourrandomscript.make_text(full_text)
-    ourrandomscript.make_text(full_text)
-    ourrandomscript.make_text(full_text)
+    # ourrandomscript.make_text(full_text)
+    # ourrandomscript.make_text(full_text)
+    # ourrandomscript.make_text(full_text)
+    # ourrandomscript.make_text(full_text)
